@@ -20,6 +20,16 @@ const addTaskButton = document.getElementsByTagName("button")[0];
 const taskList = document.getElementById("tasks_list");
 const toDoCounterText = document.getElementById("todo_count");
 const doneCounterText = document.getElementById("done_count");
+const emptyTasks = document.getElementById("empty_tasks");
+
+// Empty tasks
+function verifyIfListIsEmpty() {
+  if (tasksData.length === 0) {
+    emptyTasks.classList.remove("hidden");
+  } else {
+    emptyTasks.classList.add("hidden");
+  }
+}
 
 // Counter
 function counter() {
@@ -90,7 +100,9 @@ function addTask(event) {
   tasksData.push(newTask);
   const taskElement = createNewTaskEl(newTask.name, newTask.id);
   taskList.appendChild(taskElement);
+
   counter();
+  verifyIfListIsEmpty();
 }
 
 // Complete task
@@ -113,6 +125,7 @@ function completeTask(event) {
   tasksData.find((task) => {
     if (task.id === taskToCompleteId) task.toDo = false;
   });
+
   counter();
 }
 // Incomplete task
@@ -135,6 +148,7 @@ function incompleteTask(event) {
   tasksData.find((task) => {
     if (task.id === taskToCompleteId) task.toDo = true;
   });
+
   counter();
 }
 // Delete task
@@ -147,7 +161,9 @@ function deleteTask(event) {
   );
   tasksData = tasksWithoutDeletedOne;
   taskList.removeChild(taskToDelete);
+
   counter();
+  verifyIfListIsEmpty();
 }
 
 // Sync HTML with taskData list
