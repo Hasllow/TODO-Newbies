@@ -44,7 +44,7 @@
           </div>
         </section>
 
-        <section class="empty_tasks">
+        <section class="empty_tasks hidden">
           <img src="./assets/empty-tasks.svg" alt="" />
           <div class="">
             <p>Você ainda não tem tarefas cadastradas</p>
@@ -53,8 +53,19 @@
         </section>
 
         <ul class="tasks_list">
-          <li class="task">
-            <p>Dar banho nos gatos</p>
+          <li class="task todo">
+            <div>
+              <i class="ph-duotone ph-circle-dashed check_btn"></i>
+              <p>Dar banho nos gatos</p>
+            </div>
+            <i class="ph-duotone ph-trash delete_btn"></i>
+          </li>
+          <li class="task done">
+            <div>
+              <i class="ph-duotone ph-check-circle check_btn"></i>
+              <p class="risked">Dar banho nos gatos</p>
+            </div>
+            <i class="ph-duotone ph-trash delete_btn"></i>
           </li>
         </ul>
       </main>
