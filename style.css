@@ -49,6 +49,8 @@ button:hover {
   cursor: pointer;
 }
 
+/* ------------------------------ WRAPPER BELOW ------------------------------ */
+
 .wrapper {
   max-width: 46rem;
   margin: 0 auto;
@@ -66,4 +68,13 @@ button:hover {
   html {
     font-size: 87.5%;
   }
+}
+
+/* ------------------------------ HEADER BELOW ------------------------------ */
+
+header {
+  display: flex;
+  justify-content: center;
+
+  padding: calc(6.75rem - 2rem) 0;
 }
