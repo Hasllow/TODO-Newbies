@@ -18,6 +18,25 @@ let tasksData = [
 const addTaskInput = document.getElementById("task_input");
 const addTaskButton = document.getElementsByTagName("button")[0];
 const taskList = document.getElementById("tasks_list");
+const toDoCounterText = document.getElementById("todo_count");
+const doneCounterText = document.getElementById("done_count");
+
+// Counter
+function counter() {
+  let toDoCounter = 0;
+  let doneCounter = 0;
+
+  toDoCounter = tasksData.length;
+  toDoCounterText.innerHTML = `${toDoCounter}`;
+
+  for (const task of tasksData) {
+    if (task.toDo === false) doneCounter++;
+  }
+
+  doneCounterText.innerHTML = `${doneCounter}`;
+}
+
+counter();
 
 // Create new task element
 function createNewTaskEl(taskName, taskId) {
@@ -71,6 +90,7 @@ function addTask(event) {
   tasksData.push(newTask);
   const taskElement = createNewTaskEl(newTask.name, newTask.id);
   taskList.appendChild(taskElement);
+  counter();
 }
 
 // Complete task
@@ -93,6 +113,7 @@ function completeTask(event) {
   tasksData.find((task) => {
     if (task.id === taskToCompleteId) task.toDo = false;
   });
+  counter();
 }
 // Incomplete task
 function incompleteTask(event) {
@@ -114,6 +135,7 @@ function incompleteTask(event) {
   tasksData.find((task) => {
     if (task.id === taskToCompleteId) task.toDo = true;
   });
+  counter();
 }
 // Delete task
 function deleteTask(event) {
@@ -125,6 +147,7 @@ function deleteTask(event) {
   );
   tasksData = tasksWithoutDeletedOne;
   taskList.removeChild(taskToDelete);
+  counter();
 }
 
 // Sync HTML with taskData list
