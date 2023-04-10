@@ -1,5 +1,5 @@
 function uid() {
-  return Date.toString(16) + Math.random().toString(16).substring(2);
+  return Date.now().toString(16) + Math.random().toString(16).substring(2);
 }
 
 let tasksData = [
@@ -11,7 +11,7 @@ let tasksData = [
   {
     id: uid(),
     name: "Dar banho nos gatos",
-    toDo: false,
+    toDo: true,
   },
 ];
 
@@ -33,14 +33,14 @@ function createNewTaskEl(taskName, taskId) {
   todoIcon.classList.add("ph-duotone");
   todoIcon.classList.add("ph-circle-dashed");
   todoIcon.classList.add("check_btn");
-  todoIcon.addEventListener("click", completeTask());
+  todoIcon.addEventListener("click", completeTask);
 
   let doneIcon = document.createElement("i");
   doneIcon.classList.add("ph-duotone");
   doneIcon.classList.add("ph-check-circle");
   doneIcon.classList.add("check_btn");
   doneIcon.classList.add("hidden");
-  doneIcon.addEventListener("click", incompleteTask());
+  doneIcon.addEventListener("click", incompleteTask);
 
   let name = document.createElement("p");
   name.innerHTML = taskName;
@@ -49,7 +49,7 @@ function createNewTaskEl(taskName, taskId) {
   deleteIcon.classList.add("ph-duotone");
   deleteIcon.classList.add("ph-trash");
   deleteIcon.classList.add("delete_btn");
-  deleteIcon.addEventListener("click", deleteTask());
+  deleteIcon.addEventListener("click", deleteTask);
 
   leftContent.appendChild(todoIcon);
   leftContent.appendChild(doneIcon);
@@ -72,13 +72,42 @@ function addTask(event) {
   const taskElement = createNewTaskEl(newTask.name, newTask.id);
   taskList.appendChild(taskElement);
 }
+
 // Complete task
 function completeTask(event) {
-  console.log("Task marcada como completa");
+  const todoIcon = event.target;
+  todoIcon.classList.add("hidden");
+
+  const taskToCompleteId = todoIcon.parentNode.parentNode.id;
+  const taskToComplete = document.getElementById(taskToCompleteId);
+
+  taskToComplete.classList.add("done");
+  taskToComplete.classList.remove("todo");
+
+  const doneIcon = todoIcon.parentNode.childNodes[1];
+  doneIcon.classList.remove("hidden");
+
+  tasksData.find((task) => {
+    if (task.id === taskToCompleteId) task.toDo = false;
+  });
 }
 // Incomplete task
 function incompleteTask(event) {
-  console.log("Task marcada como incompleta");
+  const doneIcon = event.target;
+  doneIcon.classList.add("hidden");
+
+  const taskToCompleteId = doneIcon.parentNode.parentNode.id;
+  const taskToComplete = document.getElementById(taskToCompleteId);
+
+  taskToComplete.classList.add("todo");
+  taskToComplete.classList.remove("done");
+
+  const todoIcon = doneIcon.parentNode.childNodes[0];
+  todoIcon.classList.remove("hidden");
+
+  tasksData.find((task) => {
+    if (task.id === taskToCompleteId) task.toDo = true;
+  });
 }
 // Delete task
 function deleteTask(event) {
