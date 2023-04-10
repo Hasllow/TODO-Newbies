@@ -22,7 +22,10 @@ const taskList = document.getElementById("tasks_list");
 // Add new task
 function addTask(event) {
   event.preventDefault();
-  console.log("Task adicionada");
+
+  const newTaskName = addTaskInput.value;
+  const newTask = { id: uid(), name: newTaskName, toDo: true };
+  tasksData.push(newTask);
 }
 // Complete task
 function completeTask(event) {
