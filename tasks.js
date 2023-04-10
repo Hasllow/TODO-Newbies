@@ -84,3 +84,9 @@ function incompleteTask(event) {
 function deleteTask(event) {
   console.log("Task deletada");
 }
+
+// Sync HTML with taskData list
+for (const task of tasksData) {
+  const taskItem = createNewTaskEl(task.name, task.id);
+  taskList.appendChild(taskItem);
+}
