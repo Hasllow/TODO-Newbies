@@ -26,7 +26,11 @@
       </header>
       <main>
         <form class="new_task_form">
-          <input type="text" placeholder="Adicione uma nova tarefa" />
+          <input
+            id="task_input"
+            type="text"
+            placeholder="Adicione uma nova tarefa"
+          />
           <button type="submit">
             Criar
             <i class="ph-bold ph-plus-circle"></i>
@@ -52,7 +56,7 @@
           </div>
         </section>
 
-        <ul class="tasks_list">
+        <ul id="tasks_list" class="tasks_list">
           <li class="task todo">
             <div>
               <i class="ph-duotone ph-circle-dashed check_btn"></i>
@@ -70,5 +74,7 @@
         </ul>
       </main>
     </div>
+
+    <script src="tasks.js"></script>
   </body>
 </html>
