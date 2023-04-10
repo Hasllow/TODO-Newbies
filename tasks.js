@@ -78,6 +78,9 @@ function completeTask(event) {
   const todoIcon = event.target;
   todoIcon.classList.add("hidden");
 
+  const text = todoIcon.parentNode.childNodes[2];
+  text.classList.add("risked");
+
   const taskToCompleteId = todoIcon.parentNode.parentNode.id;
   const taskToComplete = document.getElementById(taskToCompleteId);
 
@@ -95,6 +98,9 @@ function completeTask(event) {
 function incompleteTask(event) {
   const doneIcon = event.target;
   doneIcon.classList.add("hidden");
+
+  const text = doneIcon.parentNode.childNodes[2];
+  text.classList.remove("risked");
 
   const taskToCompleteId = doneIcon.parentNode.parentNode.id;
   const taskToComplete = document.getElementById(taskToCompleteId);
