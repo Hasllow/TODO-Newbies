@@ -2,18 +2,8 @@ function uid() {
   return Date.now().toString(16) + Math.random().toString(16).substring(2);
 }
 
-let tasksData = [
-  {
-    id: uid(),
-    name: "Ver se eu tô na esquina",
-    toDo: true,
-  },
-  {
-    id: uid(),
-    name: "Dar banho nos gatos",
-    toDo: true,
-  },
-];
+let tasksData = loadTasks();
+console.log(tasksData);
 
 const addTaskInput = document.getElementById("task_input");
 const addTaskButton = document.getElementsByTagName("button")[0];
@@ -103,6 +93,7 @@ function addTask(event) {
 
   counter();
   verifyIfListIsEmpty();
+  saveTasks();
 }
 
 // Complete task
@@ -127,6 +118,7 @@ function completeTask(event) {
   });
 
   counter();
+  saveTasks();
 }
 // Incomplete task
 function incompleteTask(event) {
@@ -150,6 +142,7 @@ function incompleteTask(event) {
   });
 
   counter();
+  saveTasks();
 }
 // Delete task
 function deleteTask(event) {
@@ -164,10 +157,25 @@ function deleteTask(event) {
 
   counter();
   verifyIfListIsEmpty();
+  saveTasks();
 }
 
 // Sync HTML with taskData list
 for (const task of tasksData) {
   const taskItem = createNewTaskEl(task.name, task.id);
   taskList.appendChild(taskItem);
+}
+
+// Save info on storage
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasksData));
+}
+
+// Load storage
+function loadTasks() {
+  const tasks = localStorage.getItem("tasks");
+
+  if (tasks === null) return [];
+
+  return JSON.parse(tasks);
 }
