@@ -3,7 +3,6 @@ function uid() {
 }
 
 let tasksData = loadTasks();
-console.log(tasksData);
 
 const addTaskInput = document.getElementById("task_input");
 const addTaskButton = document.getElementsByTagName("button")[0];
