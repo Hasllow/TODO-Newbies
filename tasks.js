@@ -39,10 +39,10 @@ function counter() {
 counter();
 
 // Create new task element
-function createNewTaskEl(taskName, taskId) {
+function createNewTaskEl(taskName, taskId, taskToDo) {
   let task = document.createElement("li");
   task.classList.add("task");
-  task.classList.add("todo");
+  task.classList.add(taskToDo ? "todo" : "done");
   task.setAttribute("id", taskId);
 
   let leftContent = document.createElement("div");
@@ -58,11 +58,17 @@ function createNewTaskEl(taskName, taskId) {
   doneIcon.classList.add("ph-duotone");
   doneIcon.classList.add("ph-check-circle");
   doneIcon.classList.add("check_btn");
-  doneIcon.classList.add("hidden");
   doneIcon.addEventListener("click", incompleteTask);
 
   let name = document.createElement("p");
   name.innerHTML = taskName;
+
+  if (!taskToDo) {
+    name.classList.add("risked");
+    todoIcon.classList.add("hidden");
+  } else {
+    doneIcon.classList.add("hidden");
+  }
 
   let deleteIcon = document.createElement("i");
   deleteIcon.classList.add("ph-duotone");
@@ -88,8 +94,9 @@ function addTask(event) {
   const newTask = { id: uid(), name: newTaskName, toDo: true };
 
   tasksData.push(newTask);
-  const taskElement = createNewTaskEl(newTask.name, newTask.id);
+  const taskElement = createNewTaskEl(newTask.name, newTask.id, newTask.toDo);
   taskList.appendChild(taskElement);
+  addTaskInput.value = "";
 
   counter();
   verifyIfListIsEmpty();
@@ -162,7 +169,7 @@ function deleteTask(event) {
 
 // Sync HTML with taskData list
 for (const task of tasksData) {
-  const taskItem = createNewTaskEl(task.name, task.id);
+  const taskItem = createNewTaskEl(task.name, task.id, task.toDo);
   taskList.appendChild(taskItem);
 }
 
