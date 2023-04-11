@@ -19,6 +19,7 @@ function verifyIfListIsEmpty() {
     emptyTasks.classList.add("hidden");
   }
 }
+verifyIfListIsEmpty();
 
 // Counter
 function counter() {
@@ -34,7 +35,6 @@ function counter() {
 
   doneCounterText.innerHTML = `${doneCounter}`;
 }
-
 counter();
 
 // Create new task element
