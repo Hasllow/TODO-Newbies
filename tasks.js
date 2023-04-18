@@ -11,6 +11,15 @@ const toDoCounterText = document.getElementById("todo_count");
 const doneCounterText = document.getElementById("done_count");
 const emptyTasks = document.getElementById("empty_tasks");
 
+// Disable Button
+addTaskButton.disabled = true;
+
+// Disable Button if empty input
+addTaskInput.addEventListener("input", () => {
+  if (addTaskInput.value === "") addTaskButton.disabled = true;
+  else addTaskButton.disabled = false;
+});
+
 // Empty tasks
 function verifyIfListIsEmpty() {
   if (tasksData.length === 0) {
@@ -96,6 +105,7 @@ function addTask(event) {
   const taskElement = createNewTaskEl(newTask.name, newTask.id, newTask.toDo);
   taskList.appendChild(taskElement);
   addTaskInput.value = "";
+  addTaskInput.dispatchEvent(new Event("input"));
 
   counter();
   verifyIfListIsEmpty();
